@@ -3,7 +3,6 @@ from flask import send_file
 from flask import Flask
 app = Flask(__name__)
 
-
 @app.route("/")
 def hello():
     return """
@@ -11,14 +10,13 @@ def hello():
     <a href="/reporte">/reporte GET,POST</a>
     """
 
-
 @app.route("/reporte", methods=['GET', 'POST'])
 def reporte():
     import reporte
     import os
     dir_imagenes = "imagenes"
-    nombre_imagen = reporte.guardar_imagen("dir_imagenes")
-    dir_imagen = os.path.dirname(__file__) + dir_imagenes + "/" + nombre_imagen
+    nombre_imagen = reporte.guardar_imagen("dir_imagenes")["nombre_imagen"]
+    dir_imagen = reporte.guardar_imagen("dir_imagenes")["dir_imagen"]
     return send_file(dir_imagen, attachment_filename=nombre_imagen)
     try:
         return send_file("arcgis.pdf", attachment_filename="python.pdf")
