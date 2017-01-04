@@ -15,11 +15,14 @@ def reporte():
     import reporte
     import os
     dir_imagenes = "imagenes"
-    nombre_imagen = reporte.guardar_imagen("dir_imagenes")["nombre_imagen"]
-    dir_imagen = reporte.guardar_imagen("dir_imagenes")["dir_imagen"]
-    return send_file(dir_imagen, attachment_filename=nombre_imagen)
+    resultado = reporte.guardar_imagen("dir_imagenes")
+    nombre_imagen = resultado["nombre_imagen"]
+    dir_imagen = resultado["dir_imagen"]
+    #return send_file(dir_imagen, attachment_filename=nombre_imagen)
+    from export_to import export_to
+    nombre_archivo = export_to(dir_imagen)
     try:
-        return send_file("arcgis.pdf", attachment_filename="python.pdf")
+        return send_file(nombre_archivo, attachment_filename="reporte.pdf")
     except Exception as e:
         return str(e)
 

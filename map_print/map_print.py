@@ -22,5 +22,6 @@ class Printer:
         }
         response = requests.get(self.print_url, params=params)
         json = response.json()
+        print(json)
         imagen = json["results"][0]["value"]["url"]
         return imagen
