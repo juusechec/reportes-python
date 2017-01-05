@@ -9,7 +9,7 @@ from docx import Document
 from docx.shared import Inches
 
 
-def generar_docx(nombre_archivo, dir_imagen, NumeroId="1", NombreProducto="Reporte acueducto", Descripcion="Acueducto", Cantidad="3 ductos"):
+def generar_docx(nombre_archivo, dir_imagen,  NombreProducto="Reporte acueducto", numero_features="1", Descripcion="Acueducto", Cantidad="3 ductos"):
 
     f = open(nombre_archivo, 'w')
 
@@ -18,8 +18,8 @@ def generar_docx(nombre_archivo, dir_imagen, NumeroId="1", NombreProducto="Repor
 
     document.add_heading('Contenido', level=1)
     document.add_paragraph('LISTA: ')
-    p = document.add_paragraph('NUMERO ID: ')
-    p.add_run(str(NumeroId)).bold = True
+    p = document.add_paragraph('NUMERO FEATURES: ')
+    p.add_run(str(numero_features)).bold = True
 
     p = document.add_paragraph('NOMBRE DEL PRODUCTO: ')
     p.add_run(str(NombreProducto)).bold = True

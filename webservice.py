@@ -22,8 +22,10 @@ def reporte(format):
     nombre_imagen = resultado["nombre_imagen"]
     dir_imagen = resultado["dir_imagen"]
     # return send_file(dir_imagen, attachment_filename=nombre_imagen)
+    from consultar_arcgis import consultar_arcgis
+    numero_features = consultar_arcgis()
     from generar_docx import generar_docx
-    nombre_archivo = generar_docx("nuevo.docx", dir_imagen)
+    nombre_archivo = generar_docx("nuevo.docx", dir_imagen, numero_features=numero_features, NombreProducto="SOME FEATURES NAME")
 
     try:
         if format == "pdf":
