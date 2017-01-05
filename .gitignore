@@ -1,3 +1,9 @@
+# Para este proyecto
+*.docx
+*.pdf
+*.odt
+/imagenes
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
