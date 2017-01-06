@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
+from flask import Flask
 from flask import send_file
 from flask import send_from_directory
-from flask import Flask
+from flask import request
+
+"""
+Ingresa al navegador con:
+http://ip:5000/reporte/pdf?url_imagen=http://ip_serv/imagen.png
+"""
+
 app = Flask(__name__)
 
 
@@ -13,40 +20,32 @@ def hello():
     """
 
 
-@app.route("/reporte/<format>", methods=['GET', 'POST'])
-def reporte(format):
-    import reporte
-    import os
-    dir_imagenes = "imagenes"
-    resultado = reporte.guardar_imagen("dir_imagenes")
-    nombre_imagen = resultado["nombre_imagen"]
-    dir_imagen = resultado["dir_imagen"]
-    # return send_file(dir_imagen, attachment_filename=nombre_imagen)
-    from consultar_arcgis import consultar_arcgis
-    numero_features = consultar_arcgis()
-    from generar_docx import generar_docx
-    nombre_archivo = generar_docx("nuevo.docx", dir_imagen, numero_features=numero_features, NombreProducto="SOME FEATURES NAME")
+@app.route("/reporte/<formato>", methods=['GET', 'POST'])
+def reporte(formato):
+    url_imagen = request.args.get('url_imagen')
+    # print("url_imagen", url_imagen)
+    from reportes import Reporte
+    nuevo_reporte = Reporte()
+    nombre_archivo = nuevo_reporte.generar_reporte1(
+        url_imagen=url_imagen,
+        formato=formato
+    )
+    print("nombre_archivo", nombre_archivo)
+    if formato == "pdf":
+        return send_file(nombre_archivo, as_attachment=True, attachment_filename="reporte.pdf")
+    elif formato == "odt":
+        return send_file(nombre_archivo, as_attachment=True, attachment_filename="reporte.odt")
+    elif formato == "docx":
+        return send_file(nombre_archivo, as_attachment=True, attachment_filename="reporte.docx")
+        #return send_from_directory(os.path.dirname(__file__), nombre_archivo, as_attachment=True)
+    else:
+        return "Extensión de archivo incorrecta."
 
-    try:
-        if format == "pdf":
-            from export_to import export_to
-            nombre_archivo = export_to(nombre_archivo, format)
-            print(os.path.dirname(__file__), nombre_archivo, format)
-            return send_file(nombre_archivo, as_attachment=True)
-        elif format == "odt":
-            from export_to import export_to
-            nombre_archivo = export_to(nombre_archivo, format)
-            print(os.path.dirname(__file__), nombre_archivo, format)
-            return send_file(nombre_archivo, as_attachment=True)
-        elif format == "docx":
-            return send_from_directory(os.path.dirname(__file__), nombre_archivo, as_attachment=True)
-        else:
-            print("Algo pasó")
-
-        # return send_file(nombre_archivo, attachment_filename="reporte.docx")
-
-    except Exception as e:
-        return str(e)
+    # try:
+    #     print()
+    # except Exception as e:
+    #     return str(e)
 
 if __name__ == "__main__":
+    # para produccion reemplazar por la IP correspondiente
     app.run(host="0.0.0.0", port="5000")

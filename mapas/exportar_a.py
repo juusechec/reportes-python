@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-def export_to(archivo_fuente, formato_destino="pdf"):
+
+
+def exportar_a(
+    archivo_fuente,
+    formato_destino="pdf",
+    destino_documento="documentos"
+):
     import subprocess as sub
     #archivo_fuente = "py3o_example.docx"
     #formato_destino = "pdf"
-    #https://help.libreoffice.org/Common/Starting_the_Software_With_Parameters
-    #http://dag.wiee.rs/home-made/unoconv/
-    p = sub.Popen(["soffice", "--convert-to", formato_destino, archivo_fuente],stdout=sub.PIPE,stderr=sub.PIPE)
+    # https://help.libreoffice.org/Common/Starting_the_Software_With_Parameters
+    # http://dag.wiee.rs/home-made/unoconv/
+    p = sub.Popen(["soffice", "--convert-to", formato_destino,
+                   archivo_fuente], stdout=sub.PIPE, stderr=sub.PIPE)
     output, errors = p.communicate()
     if errors != b"":
         return str(errors)

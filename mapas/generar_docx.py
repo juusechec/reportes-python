@@ -9,9 +9,18 @@ from docx import Document
 from docx.shared import Inches
 
 
-def generar_docx(nombre_archivo, dir_imagen,  NombreProducto="Reporte acueducto", numero_features="1", Descripcion="Acueducto", Cantidad="3 ductos"):
+def generar_docx(
+    nombre_archivo,
+    dir_imagen,
+    NombreProducto="Reporte acueducto",
+    numero_features="1",
+    Descripcion="Acueducto",
+    Cantidad="3 ductos",
+    destino_documento="documentos"
+    ):
 
-    f = open(nombre_archivo, 'w')
+    dir_archivo = destino_documento + "/" + nombre_archivo
+    f = open(dir_archivo, 'w')
 
     document = Document()
     document.add_heading("REPORTES ACUEDUCTO")
@@ -35,5 +44,5 @@ def generar_docx(nombre_archivo, dir_imagen,  NombreProducto="Reporte acueducto"
 
     document.add_picture(dir_imagen, width=Inches(5))
     #document.add_picture('capp.png', width=Inches(1.25))
-    document.save(nombre_archivo)
-    return nombre_archivo
+    document.save(dir_archivo)
+    return dir_archivo
