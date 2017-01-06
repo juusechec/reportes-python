@@ -19,18 +19,24 @@ git clone https://github.com/Schwanksta/python-arcgis-rest-query repo
 
 2) Establece las variables de entorno para el usuario y el password de arcgis online:
 
-- En Windows:
+- En Windows (cmd):
 
 ```bash
-SET ARCGIS_USERNAME=pruebasincige
-SET ARCGIS_PASSWORD=pruebasincigepassword
+SET ARCGIS_USERNAME=usuario_arcgis_online
+SET ARCGIS_PASSWORD=clave_arcgis_online
+```
+
+- En Windows (powershell):
+```bash
+$env:ARCGIS_USERNAME = "usuario_arcgis_online"
+$env:ARCGIS_PASSWORD = "clave_arcgis_online"
 ```
 
 - En GNU/Linux:
 
 ```bash
-export ARCGIS_USERNAME='pruebasincige'
-export ARCGIS_PASSWORD='pruebasincigepassword'
+export ARCGIS_USERNAME='usuario_arcgis_online'
+export ARCGIS_PASSWORD='clave_arcgis_online'
 ```
 Opcionalmente agrega esas líneas en el ***~/.bashrc***
 

@@ -17,7 +17,7 @@ def load_src(name, fpath):
 load_src("arcgis", "../repo/arcgis/arcgis.py")
 
 import arcgis
-
+import os
 
 def consultar_arcgis():
     # source = "https://services7.arcgis.com/lUZlLTBKH3INlBpk/arcgis/rest/services/IRSP_V1/FeatureServer"
@@ -35,12 +35,15 @@ def consultar_arcgis():
     source = "https://services7.arcgis.com/lUZlLTBKH3INlBpk/arcgis/rest/services/IRSP_V1/FeatureServer"
     # username = os.getenv('ARCGIS_USERNAME', None)
     # password = os.getenv('ARCGIS_PASSWORD', None)
-    username = "pruebasincige"
-    password = "pruebasincige2016"
+    username = os.getenv('ARCGIS_USERNAME', None)
+    password = os.getenv('ARCGIS_PASSWORD', None)
     # OBJECTID = "FID"  # la fila OBJECTID no está en el servicio
-    service = arcgis.ArcGIS(source,
-                            username=username,
-                            password=password)
+    service = arcgis.ArcGIS(
+        source,
+        username=username,
+        password=password
+    )
+
     layer_id = 0
     geojson = service.get(layer_id)
     return len(geojson["features"])
