@@ -8,6 +8,15 @@ Se generan reportes PDF a partir de la implementación REST de los servicios de 
 - python-arcgis-rest-query
 - Flask *
 
+# Instalación dependencias Centos 7
+```bash
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh # a todo sí
+pip install flask
+pip install python-docx
+sudo yum install -y libreoffice
+```
+
 # Pasos de instalación
 
 1) Instalar una de las dependencias: (escriba los comandos preferiblemente en git-bash)
@@ -42,8 +51,8 @@ Opcionalmente agrega esas líneas en el ***~/.bashrc***
 
 3) Cree unos directorios necesarios para el despliegue:
 ```bash
-mkdir images
-mkdir pdfs
+mkdir imagenes
+mkdir documentos
 ```
 
 4) Ejecutar el webservice:

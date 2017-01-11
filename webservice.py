@@ -16,7 +16,7 @@ app = Flask(__name__)
 def hello():
     return """
     Rutas configuradas: <br />
-    <a href="/reporte">/reporte GET,POST</a>
+    <a href="/reporte/pdf?url_imagen=https://upload.wikimedia.org/wikipedia/commons/6/63/Mapa_Mundi_Detalle_Max_2008.png">/reporte/pdf?url_imagen=http://ip/imagen.png GET,POST</a>
     """
 
 
